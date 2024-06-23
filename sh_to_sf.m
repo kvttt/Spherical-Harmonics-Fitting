@@ -22,8 +22,12 @@ if nargin < 6
     legacy = true;
 end
 
+sz = size(sh);
+
 [B, ~, ~] = real_sh_descoteaux(sh_order_max, theta, phi, full_basis, legacy);
 
-sf = B'*sh(:);
+sh = reshape(sh, [], sz(end));
+sf = sh*B;
+sf = reshape(sf, [sz(1:end-1), size(B,2)]);
 
 end

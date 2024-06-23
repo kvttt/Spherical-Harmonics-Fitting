@@ -27,14 +27,19 @@ if nargin < 7
     legacy = true;
 end
 
-[B, ~, l] = real_sh_descoteaux(sh_order_max, theta, phi, full_basis, legacy)
+sz = size(sf);
+
+[B, ~, l] = real_sh_descoteaux(sh_order_max, theta, phi, full_basis, legacy);
 
 L = -l.*(l+1);
 L = sqrt(smooth)*L;
 L = diag(L);
 B_pinv = pinv([B'; L]);
-B_pinv = B_pinv(:,1:size(B,2));
-sh = B_pinv*sf(:);
+B_pinv = B_pinv(:, 1:size(B,2));
+
+sf = reshape(sf, [], sz(end));
+sh = sf*B_pinv';
+sh = reshape(sh, [sz(1:end-1), size(B_pinv,1)]);
 
 end
 

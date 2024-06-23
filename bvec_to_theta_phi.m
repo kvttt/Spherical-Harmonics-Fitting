@@ -10,12 +10,10 @@ function [theta, phi] = bvec_to_theta_phi(bvec)
 %
 % Kaibo, 2024
 
-bvec = reshape(bvec, [], 3);
+theta = atan2(sqrt(bvec(1,:).^2+bvec(2,:).^2), bvec(3,:));
+phi = atan2(bvec(2,:), bvec(1,:));
 
-theta = atan2(sqrt(bvec(:,1).^2+bvec(:,2).^2), bvec(:,3));
-phi = atan2(bvec(:,2), bvec(:,1));
-
-r = sqrt(bvec(:,1).^2+bvec(:,2).^2+bvec(:,3).^2);
+r = sqrt(bvec(1,:).^2+bvec(2,:).^2+bvec(3,:).^2);
 del_r = abs(r(:)-1);
 
 if any(del_r>1e-6)

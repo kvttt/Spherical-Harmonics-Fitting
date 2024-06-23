@@ -12,7 +12,10 @@ function Ylm = Ylm(m, l, theta, phi)
 %
 % The following MATLAB and Python code are equivalent:
 %  - MATLAB: Ylm(m, l, theta, phi)
-%  - Python: scipy.special.sph_harm(m, l, theta, phi)
+%  - Python: scipy.special.sph_harm(m, l, phi, theta)
+%  - The reason why the order of phi and theta are swapped is because
+%    MATLAB and DIPY use theta for the polar angle and phi for the azimuthal angle
+%    while SciPy uses phi for the polar angle and theta for the azimuthal angle
 % 
 % Caveats:
 %  - m and l are internally converted to column vector
@@ -32,9 +35,9 @@ Ylm = zeros(length(m), length(theta));
 
 for curr_l = unique(l)'
     curr_m = m(l==curr_l);
-    curr_Pl = legendre(curr_l, cos(phi), 'norm');
+    curr_Pl = legendre(curr_l, cos(theta), 'norm');
     curr_Plm = curr_Pl(abs(curr_m)+1, :).*mask(l==curr_l);
-    curr_Ylm = (1/sqrt(2*pi))*curr_Plm.*exp(1i*curr_m*theta);
+    curr_Ylm = (1/sqrt(2*pi))*curr_Plm.*exp(1i*curr_m*phi);
     Ylm(l==curr_l, :) = curr_Ylm;
 end
 

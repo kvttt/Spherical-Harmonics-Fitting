@@ -61,9 +61,9 @@ if nargin < 5
 end
 
 if legacy
-    sh = Ylm(abs(m), l, phi, theta);
+    sh = Ylm(abs(m), l, theta, phi);
 else
-    sh = Ylm(m, l, phi, theta);
+    sh = Ylm(m, l, theta, phi);
 end
 
 real_sh = (m>0).*imag(sh)*sqrt(2) ...
