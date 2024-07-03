@@ -54,7 +54,7 @@ Detailed versions of the examples can be found here: [test.m](test.m) and [test.
 Notes
 -----
 
-Accompanying notes will be made available soon!
+[Accompanying note for Spherical Harmonics Fitting](https://kvttt.github.io/files/Spherical_Harmonics_Fitting.pdf)
 
 
 Referneces
